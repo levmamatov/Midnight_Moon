@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База отдыха «Вечерний полумесяц» | Телецкое озеро</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/front/css/style.css">
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header__container">
+            <a href="#" class="logo">
+                <span class="logo__title">Вечерний Полумесяц</span>
+                <span class="logo__subtitle">База отдыха</span>
+            </a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="#about" class="nav__link">О нас</a></li>
+                    <li><a href="#cottages" class="nav__link">Домики</a></li>
+                    <li><a href="#activities" class="nav__link">Развлечения</a></li>
+                    <li><a href="#contacts" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="header__contacts">
+                <a href="tel:+79628155446" class="header__phone"><i class="fa-solid fa-phone"></i> +7 (962) 815-54-46</a>
+                <a href="#booking" class="btn btn--secondary">Забронировать</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Главный экран -->
+        <section class="hero">
+            <div class="hero__overlay"></div>
+            <div class="container hero__container">
+                <h1 class="hero__title">Душевный отдых на берегу Телецкого озера</h1>
+                <p class="hero__subtitle">Уютные деревянные домики, баня на дровах, бассейн и чистый воздух Алтая для семьи и друзей.</p>
+                <div class="hero__actions">
+                    <a href="#booking" class="btn btn--primary">Забронировать домик</a>
+                    <a href="#cottages" class="btn btn--outline">Смотреть варианты</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section id="about" class="about section">
+            <div class="container grid grid--2-cols">
+                <div class="about__content">
+                    <span class="section-tag">О нашей базе</span>
+                    <h2 class="section-title">Тишина, комфорт и атмосфера Горного Алтая</h2>
+                    <p class="about__text">
+                        «Вечерний полумесяц» — это место для тех, кто хочет отдохнуть от шумного города, посидеть у костра и насладиться природой. У нас расположены 10 уютных летних домиков из бруса.
+                    </p>
+                    <p class="about__text">
+                        На территории есть всё для простого и душевного отдыха: освежающий бассейн с шезлонгами, банька на дровах, мангалы у каждого домика и берег Телецкого озера прямо рядом с вами.
+                    </p>
+                    <ul class="about__features">
+                        <li><i class="fa-solid fa-check"></i> Бассейн с зонами для загара</li>
+                        <li><i class="fa-solid fa-check"></i> Озеро в двух шагах от территории</li>
+                        <li><i class="fa-solid fa-check"></i> Собственные кухонные зоны и мангалы</li>
+                    </ul>
+                </div>
+
+                <!-- Слайдер -->
+                <div class="about__gallery">
+                    <div class="slider" id="aboutSlider">
+                        <div class="slider__slides">
+                            <div class="slider__slide active">
+                                <img src="/assets/view on base 1.jpg" alt="Домики вечером">
+                                
+                            </div>
+                            <div class="slider__slide">
+                                <img src="/assets/inside house.jpg" alt="Озеро и природа">
+                                
+                            </div>
+                            <div class="slider__slide">
+                                <img src="/assets/view on base 2.jpg" alt="Уютная территория">
+                                
+                            </div>
+                        </div>
+                        <div class="slider__controls">
+                            <button type="button" class="slider__btn" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button type="button" class="slider__btn" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Домики -->
+        <section id="cottages" class="cottages section section--bg">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Проживание</span>
+                    <h2 class="section-title">Выберите ваш домик</h2>
+                </div>
+                
+                <div class="grid grid--3-cols">
+                    <!-- Домик 1 -->
+                    <article class="cottage-card">
+                        <div class="cottage-card__image-wrapper">
+                            <img src="/assets/small house.jpg" alt="Домик Растущий серп" class="cottage-card__img">
+                        </div>
+                        <div class="cottage-card__body">
+                            <h3 class="cottage-card__title">«Растущий серп»</h3>
+                            <p class="cottage-card__desc">Небольшой уютный домик для пары. Спокойная атмосфера, мягкая кровать и удобная мини-кухня.</p>
+                            <ul class="cottage-card__amenities">
+                                <li><i class="fa-solid fa-user-group"></i> До 2 гостей</li>
+                                <li><i class="fa-solid fa-kitchen-set"></i> Мини-кухня</li>
+                                <li><i class="fa-solid fa-wifi"></i> Wi-Fi</li>
+                            </ul>
+                            <div class="cottage-card__footer">
+                                <a href="#booking" class="btn btn--primary btn--full select-house-btn" data-house="Растущий серп">Забронировать</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Домик 2 -->
+                    <article class="cottage-card">
+                        <div class="cottage-card__image-wrapper">
+                            <img src="/assets/house with pool.jpg" alt="Домик Полулуние" class="cottage-card__img">
+                        </div>
+                        <div class="cottage-card__body">
+                            <h3 class="cottage-card__title">«Полулуние»</h3>
+                            <p class="cottage-card__desc">Отличный вариант с просторной верандой для вечерних посиделок и собственной мангальной зоной.</p>
+                            <ul class="cottage-card__amenities">
+                                <li><i class="fa-solid fa-user-group"></i> До 4 гостей</li>
+                                <li><i class="fa-solid fa-utensils"></i> Веранда</li>
+                                <li><i class="fa-solid fa-fire"></i> Мангал</li>
+                            </ul>
+                            <div class="cottage-card__footer">
+                                <a href="#booking" class="btn btn--primary btn--full select-house-btn" data-house="Полулуние">Забронировать</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Домик 3 -->
+                    <article class="cottage-card">
+                        <div class="cottage-card__image-wrapper">
+                            <img src="/assets/big house.jpg" alt="Домик Новолуние" class="cottage-card__img">
+                        </div>
+                        <div class="cottage-card__body">
+                            <h3 class="cottage-card__title">«Новолуние»</h3>
+                            <p class="cottage-card__desc">Просторный двухэтажный дом с панорамными окнами и прекрасным видом на Телецкое озеро.</p>
+                            <ul class="cottage-card__amenities">
+                                <li><i class="fa-solid fa-user-group"></i> До 6 гостей</li>
+                                <li><i class="fa-solid fa-mountain"></i> Вид на озеро</li>
+                                <li><i class="fa-solid fa-house"></i> 2 эт.</li>
+                            </ul>
+                            <div class="cottage-card__footer">
+                                <a href="#booking" class="btn btn--primary btn--full select-house-btn" data-house="Новолуние">Забронировать</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Разлечения -->
+        <section id="activities" class="activities section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Досуг</span>
+                    <h2 class="section-title">Развлечения и активный отдых</h2>
+                </div>
+                <div class="grid grid--3-cols">
+                    <div class="activity-card">
+                        <div class="activity-card__image-wrapper">
+                            <img src="/assets/banya.jpg" alt="Баня и бассейн" class="activity-card__img">
+                        </div>
+                        <div class="activity-card__content">
+                            <div class="activity-card__icon"><i class="fa-solid fa-hot-tub-person"></i></div>
+                            <h3 class="activity-card__title">Баня & Бассейн</h3>
+                            <p class="activity-card__desc">Горячая парная на дровах, прохладный бассейн и комфортные шезлонги для отдыха под солнцем.</p>
+                        </div>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-card__image-wrapper">
+                            <img src="/assets/swim attraction.jpg" alt="Водные прогулки" class="activity-card__img">
+                        </div>
+                        <div class="activity-card__content">
+                            <div class="activity-card__icon"><i class="fa-solid fa-water"></i></div>
+                            <h3 class="activity-card__title">Водный спорт</h3>
+                            <p class="activity-card__desc">Прокат каноэ, катамаранов, ватрушек и гидроциклов для ярких впечатлений на воде.</p>
+                        </div>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-card__image-wrapper">
+                            <img src="/assets/trip.jpg" alt="Сплавы и экскурсии" class="activity-card__img">
+                        </div>
+                        <div class="activity-card__content">
+                            <div class="activity-card__icon"><i class="fa-solid fa-person-hiking"></i></div>
+                            <h3 class="activity-card__title">Сплавы и экскурсии</h3>
+                            <p class="activity-card__desc">Организация сплавов по реке и захватывающих прогулок по заповедным уголкам Алтая.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Бронь -->
+        <section id="booking" class="booking section section--bg">
+            <div class="container grid grid--2-cols">
+                <div class="booking__form-wrapper">
+                    <span class="section-tag">Заявка</span>
+                    <h2 class="section-title">Забронировать отдых</h2>
+                    <form id="bookingForm" class="booking-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" name="name" placeholder="Лев" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Номер телефона *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="house_type">Выберите домик *</label>
+                            <select id="house_type" name="house_type" required>
+                                <option value="" disabled selected>-- Выберите вариант --</option>
+                                <option value="Растущий серп">«Растущий серп» (2 гостя)</option>
+                                <option value="Полулуние">«Полулуние» (4 гостя)</option>
+                                <option value="Новолуние">«Новолуние» (6 гостей)</option>
+                            </select>
+                        </div>
+                        <div class="grid grid--2-cols form-row">
+                            <div class="form-group">
+                                <label for="check_in">Дата заезда *</label>
+                                <input type="date" id="check_in" name="check_in" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="check_out">Дата выезда *</label>
+                                <input type="date" id="check_out" name="check_out" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Пожелания / Комментарий</label>
+                            <textarea id="comment" name="comment" rows="3" placeholder="Заезд вечером, нужны дополнительные подушки..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+                            <span>Отправить заявку</span>
+                        </button>
+                        <div id="formStatus" class="form-status"></div>
+                    </form>
+                </div>
+
+                <!-- Контакты и Карта -->
+                <div id="contacts" class="contacts__card">
+                    <span class="section-tag">Локация</span>
+                    <h2 class="section-title">Как нас найти</h2>
+                    
+                    <div class="contacts__info">
+                        <p><i class="fa-solid fa-location-dot"></i> Республика Алтай, с. Артыбаш, Телецкое озеро</p>
+                        <p><i class="fa-solid fa-phone"></i> <a href="tel:+79628155446">+7 (962) 815-54-46</a></p>
+                        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:bassotdih@mail.ru">bassotdih@mail.ru</a></p>
+                    </div>
+
+                    <div class="contacts__map-box">
+                        <p class="contacts__map-text">Мы находимся в невероятно красивом месте прямо на берегу.</p>
+                        <a href="https://yandex.ru/maps/org/gornoye_ozero/1777346318/?ll=87.312790%2C51.791435&source=serp_navig&z=17.2" target="_blank" class="btn btn--outline btn--full">
+                            <i class="fa-solid fa-map-location-dot"></i> Открыть в Яндекс.Картах
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container footer__container">
+            <p>© 2026 База отдыха «Вечерний полумесяц».</p>
+            <a href="#" class="footer__top-link"><i class="fa-solid fa-arrow-up"></i> Наверх</a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
