@@ -49,7 +49,7 @@ if (slides.length > 0) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const API_URL = 'http://127.0.0.1:8000/api/v1/booking';
+    const API_URL = 'https://midnight-moon.onrender.com/api/v1/booking';
 
     // Маска
     const phoneInput = document.getElementById('phone');
