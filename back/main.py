@@ -40,6 +40,7 @@ class BookingRequest(BaseModel):
 # Функция отправки в Telegram
 async def send_telegram(booking: BookingRequest):
     if not TG_BOT_TOKEN or not TG_CHAT_ID:
+        print("❌ TELEGRAM ERROR: TG_BOT_TOKEN или TG_CHAT_ID не заданы в переменных окружения!")
         return False
 
     msg = (
@@ -54,14 +55,23 @@ async def send_telegram(booking: BookingRequest):
     url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage"
     payload = {"chat_id": TG_CHAT_ID, "text": msg, "parse_mode": "HTML"}
 
-    async with httpx.AsyncClient() as client:
-        res = await client.post(url, json=payload, timeout=10.0)
-        return res.status_code == 200
+    try:
+        async with httpx.AsyncClient() as client:
+            res = await client.post(url, json=payload, timeout=10.0)
+            if res.status_code != 200:
+                print(f"❌ TELEGRAM API REJECTED: Код {res.status_code}, Ответ: {res.text}")
+                return False
+            print("✅ Уведомление в Telegram успешно отправлено!")
+            return True
+    except Exception as e:
+        print(f"❌ TELEGRAM EXCEPTION: {e}")
+        return False
 
 
 # Функция отправки на Email
 def send_email(booking: BookingRequest):
     if not SMTP_USER or not SMTP_PASSWORD or not EMAIL_TO:
+        print("❌ EMAIL ERROR: Какие-то из переменных SMTP_USER, SMTP_PASSWORD, EMAIL_TO не заданы!")
         return
 
     msg = MIMEMultipart()
@@ -84,6 +94,7 @@ def send_email(booking: BookingRequest):
         with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
             server.login(SMTP_USER, SMTP_PASSWORD)
             server.send_message(msg)
+        print("✅ Письмо на почту успешно отправлено!")
     except Exception as e:
         print(f"Error sending email: {e}")
 
