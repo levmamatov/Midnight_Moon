@@ -1,5 +1,6 @@
 import os
 import smtplib
+import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from fastapi import FastAPI, BackgroundTasks, HTTPException, status
@@ -95,12 +96,25 @@ def send_email(booking: BookingRequest):
     msg.attach(MIMEText(body, 'plain', 'utf-8'))
 
     try:
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, timeout = 10) as server:
             server.login(SMTP_USER, SMTP_PASSWORD)
             server.send_message(msg)
-        print("✅ Письмо на почту успешно отправлено!")
-    except Exception as e:
-        print(f"Error sending email: {e}")
+        print("✅ Письмо успешно отправлено через порт 465!")
+        return True
+    except Exception as e_465:
+        print(f"⚠️ Порт 465 выдал ошибку: {e_465}. Пробуем порт 587...")
+
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
+            server.starttls()
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.send_message(msg)
+        print("✅ Письмо успешно отправлено через порт 587!")
+        return True
+    except Exception as e_587:
+        print(f"❌ Ошибка: оба порта недоступны. Последняя ошибка: {e_587}")
+        return False
+
 
 
 @app.post("/api/v1/booking", status_code=status.HTTP_201_CREATED)
