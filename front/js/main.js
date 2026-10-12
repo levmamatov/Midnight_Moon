@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkOutInput = document.getElementById('check_out');
 
     if (checkInInput && checkOutInput) {
+        const today = new Date().toISOString().split('T')[0];
         checkInInput.min = today;
         checkInInput.addEventListener('change', () => {
             checkOutInput.min = checkInInput.value;
