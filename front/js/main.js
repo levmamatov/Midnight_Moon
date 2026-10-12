@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkOutInput = document.getElementById('check_out');
 
     if (checkInInput && checkOutInput) {
+        checkInInput.min = today;
         checkInInput.addEventListener('change', () => {
             checkOutInput.min = checkInInput.value;
             if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
