@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Маска
+    // Маска телефона
     const phoneInput = document.getElementById('phone');
     
     if (phoneInput) {
@@ -84,11 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkOutInput = document.getElementById('check_out');
 
     if (checkInInput && checkOutInput) {
-        const today = new Date().toISOString().split('T')[0];
-        checkInInput.min = today;
-        checkInInput.max = '2027-12-31';
-        checkOutInput.max = '2027-12-31';
-
         checkInInput.addEventListener('change', () => {
             checkOutInput.min = checkInInput.value;
             if (checkOutInput.value && checkOutInput.value <= checkInInput.value) {
@@ -148,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const name = formData.get('name') || '';
             const formData = new FormData(bookingForm);
+            const name = formData.get('name') || '';
             const phone = formData.get('phone') || '';
             const checkIn = formData.get('check_in') || '';
             const checkOut = formData.get('check_out') || '';
