@@ -79,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (checkInInput && checkOutInput) {
         const today = new Date().toISOString().split('T')[0];
         checkInInput.min = today;
+        checkInInput.max = '2027-12-31';
+        checkOutInput.max = '2027-12-31';
 
         checkInInput.addEventListener('change', () => {
             checkOutInput.min = checkInInput.value;
@@ -139,32 +141,62 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Доп. валидация дат перед отправкой
-            if (checkOutInput.value <= checkInInput.value) {
+            const formData = new FormData(bookingForm);
+            const phone = formData.get('phone') || '';
+            const checkIn = formData.get('check_in') || '';
+            const checkOut = formData.get('check_out') || '';
+            const comment = formData.get('comment') || '';
+
+            formStatus.className = 'form-status';
+            formStatus.style.display = 'none';
+
+            // Валидация телефона
+            const phoneDigits = phone.replace(/\D/g, '');
+            if (phoneDigits.length !== 11) {
+                formStatus.textContent = '❌ Некорректный номер телефона. Укажите номер в формате +7 (XXX) XXX-XX-XX';
+                formStatus.className = 'form-status error';
+                formStatus.style.display = 'block';
+                return;
+            }
+
+            // Валидация дат
+            if (checkOut <= checkIn) {
                 formStatus.textContent = '❌ Дата выезда должна быть позже даты заезда!';
                 formStatus.className = 'form-status error';
                 formStatus.style.display = 'block';
                 return;
             }
 
-            const formData = new FormData(bookingForm);
+            const checkInYear = parseInt(checkIn.split('-')[0], 10);
+            const checkOutYear = parseInt(checkOut.split('-')[0], 10);
+            if (checkInYear > 2027 || checkOutYear > 2027) {
+                formStatus.textContent = '❌ Заявки на год позже 2027 временно не принимаются онлайн. Пожалуйста, позвоните нам или напишите на почту!';
+                formStatus.className = 'form-status error';
+                formStatus.style.display = 'block';
+                return;
+            }
+
+            if (comment.length > 300) {
+                formStatus.textContent = '❌ Комментарий слишком длинный (максимум 500 символов).';
+                formStatus.className = 'form-status error';
+                formStatus.style.display = 'block';
+                return;
+            }
+
             const payload = {
                 name: formData.get('name'),
-                phone: formData.get('phone'),
+                phone: phone,
                 house_type: formData.get('house_type'),
-                check_in: formData.get('check_in'),
-                check_out: formData.get('check_out'),
+                check_in: checkIn,
+                check_out: checkOut,
                 guests: 2,
-                comment: formData.get('comment') || null
+                comment: comment || null
             };
 
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span>Отправка... <i class="fa-solid fa-spinner fa-spin"></i></span>';
             
-            formStatus.className = 'form-status';
-            formStatus.style.display = 'none';
-
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -174,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const result = await response.json();
 
-                if (response.ok && result.success) {
+                if (response.ok) {
                     const orderNum = Math.floor(1000 + Math.random() * 9000);
                     formStatus.innerHTML = `
                         <div style="text-align: center; padding: 10px;">

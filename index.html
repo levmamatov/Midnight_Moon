@@ -220,7 +220,7 @@
                     <form id="bookingForm" class="booking-form">
                         <div class="form-group">
                             <label for="name">Ваше имя *</label>
-                            <input type="text" id="name" name="name" placeholder="Лев" required>
+                            <input type="text" id="name" name="name" placeholder="Имя" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Номер телефона *</label>
@@ -238,16 +238,16 @@
                         <div class="grid grid--2-cols form-row">
                             <div class="form-group">
                                 <label for="check_in">Дата заезда *</label>
-                                <input type="date" id="check_in" name="check_in" required>
+                                <input type="date" id="check_in" name="check_in" max="2027-12-31" required>
                             </div>
                             <div class="form-group">
                                 <label for="check_out">Дата выезда *</label>
-                                <input type="date" id="check_out" name="check_out" required>
+                                <input type="date" id="check_out" name="check_out" max="2027-12-31" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="comment">Пожелания / Комментарий</label>
-                            <textarea id="comment" name="comment" rows="3" placeholder="Заезд вечером, нужны дополнительные подушки..."></textarea>
+                            <label for="comment">Комментарий</label>
+                            <textarea id="comment" name="comment" rows="3" placeholder="Ваши Пожелания" maxlength="200"></textarea>
                         </div>
                         <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
                             <span>Отправить заявку</span>

@@ -1,11 +1,12 @@
 import os
 import smtplib
 import time
+import re
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from fastapi import FastAPI, BackgroundTasks, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 import httpx
 
 app = FastAPI(title="Resort Booking API")
@@ -34,12 +35,35 @@ EMAIL_TO = os.getenv("EMAIL_TO")
 
 
 class BookingRequest(BaseModel):
-    name: str = Field(..., min_length=2)
+    name: str = Field(..., min_length=2, max_length=20)
     phone: str = Field(..., min_length=10)
     house_type: str
     check_in: str
     check_out: str
     comment: str | None = None
+
+    @field_validator("phone")
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        cleaned = re.sub(r"[\s\-\(\)]", "", v)
+        # Проверяем формат РФ номера (+7... или 8...)
+        if not re.match(r"^(\+7|8)\d{10}$", cleaned):
+            raise ValueError("Некорректный номер телефона. Укажите номер в формате +7 (XXX) XXX-XX-XX")
+        return cleaned
+
+    @field_validator("check_in", "check_out")
+    @classmethod
+    def validate_year(cls, v: str) -> str:
+        # Извлекаем год из даты (предполагается YYYY-MM-DD)
+        try:
+            year = int(v.split("-")[0])
+            if year > 2027:
+                raise ValueError("Заявки на год позже 2027 временно не принимаются онлайн. Пожалуйста, позвоните нам или напишите на почту!")
+        except (IndexError, ValueError) as e:
+            if "2027" in str(e):
+                raise e
+            raise ValueError("Неверный формат даты.")
+        return v
 
 
 # Функция отправки в Telegram
