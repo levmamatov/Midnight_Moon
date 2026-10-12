@@ -675,7 +675,23 @@ img {
 
     .grid--2-cols,
     .grid--3-cols {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+    }
+
+    .nav {
+        display: none; 
+    }
+
+    .booking__form-wrapper,
+    .contacts__card {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 25px 20px !important; /* Уменьшаем внутренние отступы для узких экранов */
+        box-sizing: border-box;
+    }
+
+    .section {
+        padding: 60px 0;
     }
 
     .hero__title {
@@ -715,6 +731,19 @@ img {
         box-sizing: border-box; 
         float: none !important; 
     }
+
+    .header__container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .header__contacts {
+        gap: 10px;
+    }
+
+    .header__phone {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -725,5 +754,14 @@ img {
     .booking__form-wrapper,
     .contacts__card {
         padding: 24px;
+    }
+
+    .booking__form-wrapper,
+    .contacts__card {
+        padding: 20px 15px !important;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
     }
 }

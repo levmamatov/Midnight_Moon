@@ -51,12 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const API_URL = 'https://midnight-moon.onrender.com/api/v1/booking';
 
+    const nameInput = document.getElementById('name');
+    if (nameInput){
+        nameInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
+        });
+    }
+
     // Маска
     const phoneInput = document.getElementById('phone');
-
+    
     if (phoneInput) {
         phoneInput.addEventListener('input', (e) => {
-            let input = e.target.value.replace(/\D/g, ''); // Оставляем только цифры
+            let input = e.target.value.replace(/\D/g, '');
             
             if (input.startsWith('7') || input.startsWith('8')) {
                 input = input.substring(1);
@@ -141,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            const name = formData.get('name') || '';
             const formData = new FormData(bookingForm);
             const phone = formData.get('phone') || '';
             const checkIn = formData.get('check_in') || '';
@@ -149,6 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             formStatus.className = 'form-status';
             formStatus.style.display = 'none';
+
+            if (name.length > 20){
+                formStatus.textContent = '❌ Некорректное имя. Максимальная длина 20';
+                formStatus.className = 'form-status error';
+                formStatus.style.display = 'block';
+                return;
+            }
 
             // Валидация телефона
             const phoneDigits = phone.replace(/\D/g, '');
@@ -177,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (comment.length > 300) {
-                formStatus.textContent = '❌ Комментарий слишком длинный (максимум 500 символов).';
+                formStatus.textContent = '❌ Комментарий слишком длинный (максимум 300 символов).';
                 formStatus.className = 'form-status error';
                 formStatus.style.display = 'block';
                 return;
