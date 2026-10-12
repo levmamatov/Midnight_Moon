@@ -218,7 +218,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-                    const orderNum = Math.floor(1000 + Math.random() * 9000);
+                    let currentOrderNum = parseInt(localStorage.getItem('lastOrderNum'), 10);
+                    
+                    if (isNaN(currentOrderNum)) {
+                        currentOrderNum = 1000;
+                    }
+                    
+                    const orderNum = currentOrderNum + 1;
+                    localStorage.setItem('lastOrderNum', orderNum);
+
                     formStatus.innerHTML = `
                         <div style="text-align: center; padding: 10px;">
                             <i class="fa-solid fa-circle-check" style="font-size: 2rem; color: #81C784; margin-bottom: 8px;"></i>
